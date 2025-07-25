@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input.jsx'
 import { Label } from '@/components/ui/label.jsx'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select.jsx'
 import { ArrowLeft, CheckCircle, AlertCircle } from 'lucide-react'
+import { inserirCliente } from '../lib/supabase.js'
 
 function CadastroCliente() {
   const [formData, setFormData] = useState({
@@ -35,28 +36,50 @@ function CadastroCliente() {
     setMessage({ type: '', text: '' })
 
     try {
-      // Simular envio para Supabase
-      console.log('Dados do formulário:', formData)
-      
-      // Simular delay de rede
-      await new Promise(resolve => setTimeout(resolve, 1500))
+      // Preparar dados para o Supabase
+      const dadosParaSupabase = {
+        nome: formData.nome,
+        cpf: formData.cpf,
+        rg: formData.rg,
+        orgao_emissor: formData.orgao_emissor,
+        estado: formData.estado,
+        email: formData.email,
+        telefone: formData.telefone,
+        profissao: formData.profissao,
+        data_nascimento: formData.data_nascimento,
+        estado_civil: formData.estado_civil
+      }
+
+      // Inserir no Supabase
+      const resultado = await inserirCliente(dadosParaSupabase)
       
       setMessage({ 
         type: 'success', 
         text: 'Cliente cadastrado com sucesso! Redirecionando para Ficha de Negociação...' 
       })
 
-      // Simular redirecionamento após 2 segundos
+      // Limpar formulário após sucesso
       setTimeout(() => {
-        console.log('Redirecionando para Ficha de Negociação...')
-        // Aqui você pode implementar a navegação para a próxima página
-      }, 2000)
+        setFormData({
+          nome: '',
+          cpf: '',
+          rg: '',
+          orgao_emissor: '',
+          estado: '',
+          email: '',
+          telefone: '',
+          profissao: '',
+          data_nascimento: '',
+          estado_civil: ''
+        })
+        setMessage({ type: '', text: '' })
+      }, 3000)
 
     } catch (error) {
       console.error('Erro ao cadastrar cliente:', error)
       setMessage({ 
         type: 'error', 
-        text: 'Erro ao cadastrar cliente. Tente novamente.' 
+        text: 'Erro ao cadastrar cliente. Verifique suas credenciais do Supabase e tente novamente.' 
       })
     } finally {
       setIsLoading(false)
@@ -223,6 +246,7 @@ function CadastroCliente() {
                 <Select 
                   onValueChange={(value) => handleInputChange('estado_civil', value)}
                   disabled={isLoading}
+                  value={formData.estado_civil}
                 >
                   <SelectTrigger className="border-green-300 focus:border-green-500 focus:ring-green-200">
                     <SelectValue placeholder="Selecione" />

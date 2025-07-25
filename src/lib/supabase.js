@@ -1,14 +1,12 @@
 import { createClient } from '@supabase/supabase-js'
 
 // Configurações do Supabase
-// IMPORTANTE: Substitua estas variáveis pelas suas credenciais do Supabase
-const supabaseUrl = 'YOUR_SUPABASE_URL'
-const supabaseKey = 'YOUR_SUPABASE_ANON_KEY'
+const supabaseUrl = 'https://your-project-ref.supabase.co'
+const supabaseAnonKey = 'your-anon-key'
 
-// Criando o cliente Supabase
-export const supabase = createClient(supabaseUrl, supabaseKey)
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
-// Função para inserir dados do cliente
+// Função para inserir um novo cliente
 export const inserirCliente = async (dadosCliente) => {
   try {
     const { data, error } = await supabase
@@ -24,7 +22,7 @@ export const inserirCliente = async (dadosCliente) => {
     console.log('Cliente inserido com sucesso:', data)
     return data
   } catch (error) {
-    console.error('Erro na operação:', error)
+    console.error('Erro na função inserirCliente:', error)
     throw error
   }
 }
@@ -44,7 +42,7 @@ export const buscarClientes = async () => {
 
     return data
   } catch (error) {
-    console.error('Erro na operação:', error)
+    console.error('Erro na função buscarClientes:', error)
     throw error
   }
 }
@@ -59,13 +57,13 @@ export const buscarClientePorId = async (id) => {
       .single()
 
     if (error) {
-      console.error('Erro ao buscar cliente:', error)
+      console.error('Erro ao buscar cliente por ID:', error)
       throw error
     }
 
     return data
   } catch (error) {
-    console.error('Erro na operação:', error)
+    console.error('Erro na função buscarClientePorId:', error)
     throw error
   }
 }
@@ -87,7 +85,7 @@ export const atualizarCliente = async (id, dadosAtualizados) => {
     console.log('Cliente atualizado com sucesso:', data)
     return data
   } catch (error) {
-    console.error('Erro na operação:', error)
+    console.error('Erro na função atualizarCliente:', error)
     throw error
   }
 }
@@ -108,7 +106,7 @@ export const deletarCliente = async (id) => {
     console.log('Cliente deletado com sucesso')
     return true
   } catch (error) {
-    console.error('Erro na operação:', error)
+    console.error('Erro na função deletarCliente:', error)
     throw error
   }
 }

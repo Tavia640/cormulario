@@ -1,11 +1,11 @@
 const CACHE_NAME = 'cadastro-cliente-v1';
 const urlsToCache = [
-  './',
-  './index.html',
-  './manifest.json',
-  './favicon.ico',
-  './logo192.png',
-  './logo512.png'
+  '/cormulario/',
+  '/cormulario/index.html',
+  '/cormulario/manifest.json',
+  '/cormulario/favicon.ico',
+  '/cormulario/logo192.png',
+  '/cormulario/logo512.png'
 ];
 
 self.addEventListener('install', function(event) {

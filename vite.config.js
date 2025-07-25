@@ -5,7 +5,7 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: './', // Use relative paths for GitHub Pages
+  base: '/cormulario/', // Base path for GitHub Pages, should be the repository name
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

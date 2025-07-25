@@ -1,11 +1,9 @@
 const CACHE_NAME = 'cadastro-cliente-v1';
 const urlsToCache = [
-  './',
-  './index.html',
-  './manifest.json',
-  './favicon.ico',
-  './logo192.png',
-  './logo512.png'
+  '/',
+  '/static/js/bundle.js',
+  '/static/css/main.css',
+  '/manifest.json'
 ];
 
 self.addEventListener('install', function(event) {
